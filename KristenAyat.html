@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firman Tuhan - Daily Bread</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Styles --- */
+        :root {
+            --primary-gold: #d4af37;
+            --text-light: #ffffff;
+            --glass-bg: rgba(0, 0, 0, 0.6); /* Background kaca lebih gelap agar teks terlihat jelas */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            /* Background Gambar Yesus (HD & Fokus) */
+            background-image: url('https://i.supaimg.com/95a47a56-c7f2-45f0-ae4c-ff2002ff562d.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        /* Overlay gelap agar teks mudah dibaca */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #eee;
+            font-size: 1.2rem;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
+
+        /* Kartu Ayat (Glassmorphism) */
+        .verse-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verse-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Ikon Salib dekorasi di pojok */
+        .cross-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+        }
+
+        #verse-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            min-height: 150px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        #verse-reference {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-top: 40px;
+            font-weight: 700;
+            display: block;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
+
+        /* Efek Cursor Ketik */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--primary-gold);
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Tombol */
+        .btn-generate {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            border: none;
+            padding: 18px 50px;
+            color: #1a1a1a;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-generate:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+            background: linear-gradient(135deg, #eecf40 0%, #d4af37 100%);
+        }
+
+        .btn-generate:active {
+            transform: scale(0.95);
+        }
+
+        .btn-generate i {
+            font-size: 1.2rem;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsif HP */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            #verse-text { font-size: 1.5rem; }
+            .verse-card { padding: 40px 25px; }
+            .btn-generate { padding: 15px 30px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Firman Daily</h1>
+            <p class="subtitle">Renungan & randomizer ayat Alkitab</p>
+        </header>
+
+        <main class="verse-card">
+            <i class="fas fa-cross cross-icon"></i>
+            <div id="verse-text">Klik tombol di bawah untuk menerima firman Tuhan...</div>
+            <div id="verse-reference"></div>
+        </main>
+
+        <button class="btn-generate" onclick="getRandomVerse()">
+            <i class="fas fa-bible"></i> Acak Ayat
+        </button>
+
+        <footer>
+            &copy; 2023 Website Kristen. Soli Deo Gloria.
+        </footer>
+    </div>
+
+    <script>
+        /* --- Database Ayat (Ratusan Ayat Bisa Ditambah Di Sini) --- */
+        const verses = [
+            { text: "Karena begitu besar kasih Allah terhadap dunia ini, sehingga Ia telah mengaruniakan Anak Tunggalnya, agar setiap orang yang percaya kepadaNya tidak binasa, melainkan hidup kekal.", ref: "Yohanes 3:16" },
+            { text: "Tuhan adalah gembalaku; aku tidak kekurangan sesuatu.", ref: "Mazmur 23:1" },
+            { text: "Seringkali aku gagal, tetapi aku tidak pernah menyerah.", ref: "Galatia 6:9" },
+            { text: "Kuatkanlah tanganmu yang lemah dan lutut yang goyah.", ref: "Ibrani 12:12" },
+            { text: "Sebab kasih karunia Allah telah nyata bagi manusia, dan Ia menyelamatkan kita bukan karena perbuatan-perbuatan yang telah kita lakukan dalam kebenaran, melainkan karena rahmatNya.", ref: "Titus 3:5" },
+            { text: "Kita ketahui bahwa segala sesuatu bekerja bersama bagi kebaikan mereka yang mengasihi Allah.", ref: "Roma 8:28" },
+            { text: "Janganlah kuatir tentang apapun, tetapi dalam segala hal nyatakanlah kebutuhanmu kepada Allah dalam doa dan permohonan dengan ucapan syukur.", ref: "Filipi 4:6" },
+            { text: "Segala sesuatu boleh aku dalam Dia yang memberikan kekuatan kepadaku.", ref: "Filipi 4:13" },
+            { text: "Marilah kepada-Ku, kamu semua yang letih dan berbeban berat, dan Aku akan memberikan kelegaan kepadamu.", ref: "Matius 11:28" },
+            { text: "Kuatkan dan teguhkanlah hatimu, hai semua yang menanti TUHAN!", ref: "Mazmur 31:24" },
+            { text: "Sebab Aku tahu rancangan-rancanganKu tentang kamu, demikianlah firman TUHAN, yaitu rancangan untuk kesejahteraan dan bukan untuk kecelakaan, untuk memberikan kepadamu hari depan yang penuh harapan.", ref: "Yeremia 29:11" },
+            { text: "Sebab di mana dua atau tiga orang berkumpul dalam nama-Ku, di situ Aku berada di tengah-tengah mereka.", ref: "Matius 18:20" },
+            { text: "TUHAN itu baik; kasih setia-Nyya untuk selama-lamanya.", ref: "Mazmur 136:1" },
+            { text: "Carilah dahulu Kerajaan Allah dan kebenarannya, maka semuanya akan ditambahkan kepadamu.", ref: "Matius 6:33" },
+            { text: "Akulah jalan, kebenaran dan hidup. Tidak seorang pun datang kepada Bapa, melainkan melalui Aku.", ref: "Yohanes 14:6" },
+            { text: "Berbahagialah mereka yang lemah lembut, karena mereka akan menerima bumi warisan.", ref: "Matius 5:5" },
+            { text: "Hendaklah kamu saling mengaku dosamu dan saling mendoakan, agar kamu disembuhkan.", ref: "Yakobus 5:16" },
+            { text: "Beranilah dan teguhkanlah hatimu, hai semua yang menanti keselamatan dari TUHAN!", ref: "Mazmur 31:25" },
+            { text: "Jadilah kuat dan teguh hati, janganlah gentar dan janganlah takut, karena TUHAN, Allahmu, menyertai kamu ke mana saja kamu pergi.", ref: "Yosua 1:9" },
+            { text: "Cinta tidak pernah gagal.", ref: "1 Korintus 13:8" },
+            { text: "Damai sejahtera-Ku akan Kuberikan kepadamu; bukan seperti yang diberikan orang dunia ini. Janganlah hatimu gelisah dan janganlah takut.", ref: "Yohanes 14:27" },
+            { text: "Sebab Allah mengaruniakan kasih karunia dan pengampunan kepada kita.", ref: "Efesus 1:7" },
+            { text: "Pujilah TUHAN, hai segala bangsa, memujilah Dia, hai segala suku bangsa!", ref: "Mazmur 117:1" },
+            { text: "Engkaulah yang membimbing langkahku seperti kaki merpati.", ref: "Amsal 5:23" },
+            { text: "Biarlah orang-orang yang mencari TUHAN memuji kebaikannya.", ref: "Mazmur 107:8" },
+            { text: "Datanglah, bersujudlah di hadapan TUHAN, Pencipta kita!", ref: "Mazmur 95:6" },
+            { text: "TUHAN itu Raja! Biarlah bumi bersuka!", ref: "Mazmur 97:1" },
+            { text: "Sebab Engkaulah TUHAN yang tinggi di atas seluruh bumi, Engkau sangat ditinggikan.", ref: "Mazmur 97:9" },
+            { text: "Cahaya bercahaya bagi orang benar, dan bagi orang yang berlaku jujur, terang.", ref: "Mazmur 97:11" },
+            { text: "Bersukacitalah dalam TUHAN, hai orang-orang benar! Bagi orang-orang yang jujur, pujian itu wajar.", ref: "Mazmur 33:1" }
+        ];
+
+        const verseTextElement = document.getElementById('verse-text');
+        const verseRefElement = document.getElementById('verse-reference');
+        let isTyping = false;
+
+        function getRandomVerse() {
+            if (isTyping) return; // Mencegah klik ganda saat animasi berjalan
+            
+            // 1. Reset UI
+            verseTextElement.innerHTML = '';
+            verseRefElement.innerHTML = '';
+            verseTextElement.classList.add('typing-cursor');
+            isTyping = true;
+
+            // 2. Pilih Ayat Acak
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            const selectedVerse = verses[randomIndex];
+
+            // 3. Efek Mengetik (Typing Animation)
+            let charIndex = 0;
+            const textToType = selectedVerse.text;
+
+            function typeWriter() {
+                if (charIndex < textToType.length) {
+                    verseTextElement.textContent += textToType.charAt(charIndex);
+                    charIndex++;
+                    // Kecepatan typing (semakin kecil angka, semakin cepat)
+                    setTimeout(typeWriter, 30); 
+                } else {
+                    // Jika selesai mengetik
+                    finishTyping(selectedVerse.ref);
+                }
+            }
+
+            typeWriter();
+        }
+
+        function finishTyping(ref) {
+            verseTextElement.classList.remove('typing-cursor');
+            verseRefElement.textContent = "- " + ref;
+            isTyping = false;
+        }
+    </script>
+</body>
+</html>
